@@ -1,6 +1,6 @@
 {
   "name": "xmljson-converter",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "main": "xml2json.js",
   "description": "XML <=> JSON mapping/converting library",
   "repository": {
