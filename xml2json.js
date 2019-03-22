@@ -97,10 +97,6 @@
 				return str;
 		}
 
-		function unescapeXmlChars(str) {
-			return str.replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, '&');
-		}
-
 		function checkInStdFiltersArrayForm(stdFiltersArrayForm, obj, name, path) {
 			var idx = 0;
 			for(; idx < stdFiltersArrayForm.length; idx++) {
@@ -148,7 +144,7 @@
 			var bits = prop.split(/[-T:+Z]/g);
 
 			var d = new Date(bits[0], bits[1]-1, bits[2]);
-			var secondBits = bits[5].split("\.");
+			var secondBits = bits[5].split(".");
 			d.setHours(bits[3], bits[4], secondBits[0]);
 			if(secondBits.length>1)
 				d.setMilliseconds(secondBits[1]);
@@ -175,7 +171,7 @@
 
 		function checkFromXmlDateTimePaths(value, childName, fullPath) {
 			if(config.datetimeAccessFormPaths.length > 0) {
-				var path = fullPath.split("\.#")[0];
+				var path = fullPath.split(".#")[0];
 				if(checkInStdFiltersArrayForm(config.datetimeAccessFormPaths, value, childName, path)) {
 					return fromXmlDateTime(value);
 				}
@@ -195,14 +191,15 @@
 		}
 
 		function parseDOMChildren( node, path ) {
+			var result = new Object(),
+				nodeChildren = node.childNodes,
+				cidx, child, childName;
 			if(node.nodeType == DOMNodeTypes.DOCUMENT_NODE) {
-				var result = new Object;
-				var nodeChildren = node.childNodes;
 				// Alternative for firstElementChild which is not supported in some environments
-				for(var cidx=0; cidx <nodeChildren.length; cidx++) {
-					var child = nodeChildren.item(cidx);
+				for(cidx=0; cidx <nodeChildren.length; cidx++) {
+					child = nodeChildren.item(cidx);
 					if(child.nodeType == DOMNodeTypes.ELEMENT_NODE) {
-						var childName = getNodeLocalName(child);
+						childName = getNodeLocalName(child);
 						result[childName] = parseDOMChildren(child, childName);
 					}
 				}
@@ -210,15 +207,12 @@
 			}
 			else
 			if(node.nodeType == DOMNodeTypes.ELEMENT_NODE) {
-				var result = new Object;
 				result.__cnt=0;
 
-				var nodeChildren = node.childNodes;
-
 				// Children nodes
-				for(var cidx=0; cidx <nodeChildren.length; cidx++) {
-					var child = nodeChildren.item(cidx); // nodeChildren[cidx];
-					var childName = getNodeLocalName(child);
+				for(cidx=0; cidx <nodeChildren.length; cidx++) {
+					child = nodeChildren.item(cidx); // nodeChildren[cidx];
+					childName = getNodeLocalName(child);
 
 					if(child.nodeType!= DOMNodeTypes.COMMENT_NODE) {
 						var childPath = path+"."+childName;
