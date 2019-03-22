@@ -1,16 +1,17 @@
 {
-  "name": "xmljson-converter",
+  "name": "@andxor/x2js",
   "version": "1.2.2",
   "main": "xml2json.js",
   "description": "XML <=> JSON mapping/converting library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mitchbox/xmljson-converter.git"
+    "url": "https://github.com/andxor/x2js.git"
   },
-  "homepage": "https://github.com/mitchbox/xmljson-converter",
+  "homepage": "https://github.com/andxor/x2js",
   "license": "Apache Licence v2",
   "authors": [
-    "Mitch Chen (https://github.com/mitchbox)"
+    "Mitch Chen (https://github.com/mitchbox)",
+    "Lapo Luchini <l.luchini@andxor.it>"
   ],
   "ignore": [
     ".hg*",
