@@ -8,7 +8,7 @@
     "url": "https://github.com/andxor/x2js.git"
   },
   "homepage": "https://github.com/andxor/x2js",
-  "license": "Apache Licence v2",
+  "license": "Apache-2.0",
   "authors": [
     "Mitch Chen (https://github.com/mitchbox)",
     "Lapo Luchini <l.luchini@andxor.it>"
