@@ -1,4 +1,4 @@
-x2js - XML to JSON and vice versa for JavaScript
+x2js - XML to JSON and vice versa for JavaScrip
 ====
 This library provides XML to JSON (JavaScript Objects) and vice versa javascript conversion functions.
 The library is very small and has no any dependencies.
@@ -9,7 +9,7 @@ The library is very small and has no any dependencies.
  * `new X2JS(config)` - to create your own instance with additional config
 
  * `<instance>.xml2json` - Convert XML specified as DOM Object to JSON
- * `<instance>.json2xml` - Convert JSON to XML DOM Object
+ * `<instance>.json2xml` - Convert JSON to XML DOM Objec
  * `<instance>.xml_str2json` - Convert XML specified as string to JSON
  * `<instance>.json2xml_str` - Convert JSON to XML string
  * `<instance>.asArray` - Utility function to work with a JSON field always in array form
@@ -53,10 +53,10 @@ var jsonObj = x2js.xml_str2json( xmlText );
 ```
 // Create x2js instance with default config
 var x2js = new X2JS();
-var jsonObj = { 
+var jsonObj = {
      MyRoot : {
                 test: 'success',
-                test2 : { 
+                test2 : {
                     item : [ 'val1', 'val2' ]
                 }
       }
@@ -79,7 +79,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
     var xmlText = "<MyArrays>"+
         "<test><item>success</item><item>second</item></test>"+
         "</MyArrays>";
-        
+
     var jsonObj = x2js.xml_str2json( xmlText );
     console.log(jsonObj.MyArrays.test2.item[0]);
 ```
@@ -101,7 +101,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
 
 ```
     // Create x2js instance with default config
-    var x2js = new X2JS();   
+    var x2js = new X2JS();
 
     var xmlText = "<MyOperation myAttr='SuccessAttrValue'>MyText</MyOperation>";
     var jsonObj = x2js.xml_str2json( xmlText );
@@ -109,7 +109,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
     // Access to attribute
     console.log(jsonObj.MyOperation._myAttr);
 
-    // Access to text
+    // Access to tex
     console.log(jsonObj.MyOperation.__text);
     // Or
     console.log(jsonObj.MyOperation.toString());
@@ -121,7 +121,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
     var x2js = new X2JS({
         attributePrefix : "$"
     });
-    
+
     var xmlText = "<MyOperation myAttr='SuccessAttrValue'>MyText</MyOperation>";
 
     var jsonObj = x2js.xml_str2json( xmlText );
@@ -154,7 +154,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
                 'cms:MyAnotherChild' : 'vdfd'
             }
     }
-    
+
     var xmlDocStr = x2js.json2xml_str(
         testObjC
     );
@@ -176,7 +176,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
                 }
             }
     }
-    
+
     var xmlDocStr = x2js.json2xml_str(
         testObjNew
     );
@@ -224,7 +224,7 @@ var xmlAsStr = x2js.json2xml_str( jsonObj );
         success: function(xmlDoc) {
             var x2js = new X2JS();
             var jsonObj = x2js.xml2json(xmlDoc);
-      
+
         }
     });
 ```

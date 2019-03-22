@@ -4,7 +4,7 @@
 <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'></script>
 <script type='text/javascript' src="xml2json.js"></script>
 
-<script type='text/javascript'>//<![CDATA[ 
+<script type='text/javascript'>//<![CDATA[
 $(window).load(function(){
 	var x2js = new X2JS();
 	function convertXml2JSon() {
@@ -20,21 +20,21 @@ $(window).load(function(){
 	convertJSon2XML();
 	$("#convertToJsonBtn").click(convertXml2JSon);
 	$("#convertToXmlBtn").click(convertJSon2XML);
-});//]]>  
+});//]]>
 </script>
 </head>
 <body>
     <h1>X2JS Demo</h1>
     <button id="convertToJsonBtn">XML => JSON</button>
-    <button id="convertToXmlBtn">JSON => XML</button>    
-    <div>        
+    <button id="convertToXmlBtn">JSON => XML</button>
+    <div>
         <h4>XML:</h4>
         <textarea id="xmlArea" cols="55" rows="15"></textarea>
     </div>
-    
+
     <div>
         <h4>JSON:</h4>
         <textarea id="jsonArea" cols="55" rows="15"></textarea>
-    </div>    
+    </div>
 </body>
 </html>
