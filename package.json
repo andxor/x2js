@@ -13,11 +13,11 @@
     "Mitch Chen (https://github.com/mitchbox)",
     "Lapo Luchini <l.luchini@andxor.it>"
   ],
-  "ignore": [
-    ".hg*",
-    ".project",
+  "files": [
+    "README.md",
+    "package.json",
     "*.html",
-    "**/*.txt"
+    "*.js"
   ],
   "eslintConfig": {
     "env": {
