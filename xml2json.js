@@ -414,33 +414,45 @@
 				return jsonObjPath+"."+jsonPropName;
 		}
 
-		function parseJSONArray ( jsonArrRoot, jsonArrObj, attrList, jsonObjPath ) {
+		function parseJSONArray ( jsonArrRoot, jsonArrObj, attrList, jsonObjPath, offset, curr ) {
 			var result = "";
 			if(jsonArrRoot.length == 0) {
 				result+=startTag(jsonArrRoot, jsonArrObj, attrList, true);
 			}
 			else {
+				var pathBase = getJsonPropertyPath(jsonObjPath, jsonArrObj);
 				for(var arIdx = 0; arIdx < jsonArrRoot.length; arIdx++) {
+					var path = pathBase+'.'+arIdx;
+					if (offset)
+						offset[curr + result.length] = {
+							path: path,
+							value: jsonArrRoot[arIdx]
+						};
 					result+=startTag(jsonArrRoot[arIdx], jsonArrObj, parseJSONAttributes(jsonArrRoot[arIdx]), false);
-					result+=parseJSONObject(jsonArrRoot[arIdx], getJsonPropertyPath(jsonObjPath,jsonArrObj));
+					result+=parseJSONObject(jsonArrRoot[arIdx], path, offset, curr + result.length);
 					result+=endTag(jsonArrRoot[arIdx],jsonArrObj);
 				}
 			}
 			return result;
 		}
 
-		function parseJSONObject ( jsonObj, jsonObjPath ) {
+		function parseJSONObject ( jsonObj, jsonObjPath, offset, curr ) {
 			var result = "";
 
 			var elementsCnt = jsonXmlElemCount ( jsonObj );
 
 			if(elementsCnt > 0) {
 				for( var it in jsonObj ) {
-
 					if(jsonXmlSpecialElem ( jsonObj, it) || (jsonObjPath!="" && !checkJsonObjPropertiesFilter(jsonObj, it, getJsonPropertyPath(jsonObjPath,it))) )
 						continue;
 
 					var subObj = jsonObj[it];
+					var path = getJsonPropertyPath(jsonObjPath, it);
+					if (offset)
+						offset[curr + result.length] = {
+							path: path,
+							value: subObj
+						};
 
 					var attrList = parseJSONAttributes( subObj )
 
@@ -451,7 +463,7 @@
 					if(subObj instanceof Object) {
 
 						if(subObj instanceof Array) {
-							result+=parseJSONArray( subObj, it, attrList, jsonObjPath );
+							result+=parseJSONArray( subObj, it, attrList, jsonObjPath, offset, curr + result.length);
 						}
 						else if(subObj instanceof Date) {
 							result+=startTag(subObj, it, attrList, false);
@@ -462,7 +474,7 @@
 							var subObjElementsCnt = jsonXmlElemCount ( subObj );
 							if(subObjElementsCnt > 0 || subObj.__text!=null || subObj.__cdata!=null) {
 								result+=startTag(subObj, it, attrList, false);
-								result+=parseJSONObject(subObj, getJsonPropertyPath(jsonObjPath,it));
+								result+=parseJSONObject(subObj, path, offset, curr + result.length);
 								result+=endTag(subObj,it);
 							}
 							else {
@@ -563,8 +575,8 @@
 				return null;
 		};
 
-		this.json2xml_str = function (jsonObj) {
-			return parseJSONObject ( jsonObj, "" );
+		this.json2xml_str = function (jsonObj, offset) {
+			return parseJSONObject ( jsonObj, "", offset, 0 );
 		};
 
 		this.json2xml = function (jsonObj) {
